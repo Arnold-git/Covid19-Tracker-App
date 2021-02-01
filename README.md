@@ -1,4 +1,4 @@
-# Face Recognition Project #
+# Covid19 Dashboard Project #
 
 The purpose of this README.md file is to explain the steps required to setup this project in your local environment for development
 

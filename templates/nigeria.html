@@ -1,0 +1,189 @@
+<html>
+    <head>
+        <title>Covid Tracker - INDIA</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+        <!--highcharts-->
+        
+        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+        <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/mapdata/countries/in/in-all.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/series-label.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+       
+    </head>
+
+    <body style="background-color: whitesmoke;">
+        <!-- NavBar -->
+        <nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">
+            <h3>COVID-19 Analysis</h3><p style="font-size: 15px; ">- by Howbury Schools</p>
+          </a>
+        </nav>
+        <br>
+        <div class = "container">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('covid') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ url_for('nigeria') }}">Nigeria</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('world') }}" >World</a>
+            </li>
+          </ul>
+        </div>
+        
+        <br>
+        <div class="container text-center">
+          <div class="card">
+              <div class="card-body">
+                  <h1>NIGERIA ANALYSIS</h1>
+              </div>
+          </div>
+      </div>
+      <br>
+        <div class="container text-center">
+            <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Stay Safe !</strong> Total new cases are {{data['todayCases']}}
+            </div>
+        </div>
+        <br>
+
+        <!--Cards for india-->
+        <div class="container text-center">
+          <div class="row">
+              <div class="col-sm-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Confirmed Cases</h5>
+                    <svg class="bi bi-person-check-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm9.854-2.854a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0l-1.5-1.5a.5.5 0 01.708-.708L12.5 7.793l2.646-2.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <p class="card-text"></p>
+                    <button type="button" class="btn btn-info btn-lg" style=" border-radius: 0px; border: 1px solid #FFFFFF;"><strong>{{data['cases']}}   </strong><span class="badge badge-light">+{{data['todayCases']}}</span></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Active Cases</h5>
+                      <svg class="bi bi-heart-half" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M8 1.314C3.562-3.248-7.534 4.735 8 15V1.314z" clip-rule="evenodd"/>
+                          <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 01.176-.17C12.72-3.042 23.333 4.867 8 15z" clip-rule="evenodd"/>
+                      </svg>
+                      <p class="card-text"></p>
+                      <button type="button" class="btn btn-warning btn-lg" style="min-width:150px; min-height:50px; border-radius: 0px; border: 1px solid #FFFFFF;"><strong>{{data['active']}}</strong></button>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-sm-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Recovered Cases</h5>
+                      <svg class="bi bi-heart-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" clip-rule="evenodd"/>
+                      </svg>
+                      <p class="card-text"></p>
+                      <button type="button" class="btn btn-success btn-lg" style="min-width:150px; min-height:50px; border-radius: 0px; border: 1px solid #FFFFFF;"><strong>{{data['recovered']}}</strong></button>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Confirmed Deaths</h5>
+                    <svg class="bi bi-person-dash-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm5-.5a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                    </svg>
+                    <p class="card-text"> </p>
+                    <button type="button" class="btn btn-danger btn-lg" style="min-width:150px; min-height:50px; border-radius: 0px; border: 1px solid #FFFFFF;"><strong>{{data['deaths']}}   </strong><span class="badge badge-light">  +{{data['todayDeaths']}}</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+      <br>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><svg class="bi bi-file-earmark-text" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 1h5v1H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6h1v7a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2z"/>
+                  <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 019 4.5z"/>
+                  <path fill-rule="evenodd" d="M5 11.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm0-2a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5zm0-2a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                </svg>   Total Tests Conducted - {{data['tests']}}</button>
+              </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><svg class="bi bi-file-earmark-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 1H4a2 2 0 00-2 2v10a2 2 0 002 2h5v-1H4a1 1 0 01-1-1V3a1 1 0 011-1h5v2.5A1.5 1.5 0 0010.5 6H13v2h1V6L9 1z"/>
+                  <path fill-rule="evenodd" d="M15.854 10.146a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0l-1.5-1.5a.5.5 0 01.708-.708l1.146 1.147 2.646-2.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                </svg>   Tests per one million - {{data['testsPerOneMillion']}}</button>
+              </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><svg class="bi bi-file-earmark-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 1H4a2 2 0 00-2 2v10a2 2 0 002 2h5v-1H4a1 1 0 01-1-1V3a1 1 0 011-1h5v2.5A1.5 1.5 0 0010.5 6H13v2h1V6L9 1z"/>
+                  <path fill-rule="evenodd" d="M13.5 10a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13v-1.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M13 12.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
+                </svg>   Cases per one million - {{data['casesPerOneMillion']}}</button>
+              </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><svg class="bi bi-file-earmark-minus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 1H4a2 2 0 00-2 2v10a2 2 0 002 2h5v-1H4a1 1 0 01-1-1V3a1 1 0 011-1h5v2.5A1.5 1.5 0 0010.5 6H13v2h1V6L9 1z"/>
+                  <path fill-rule="evenodd" d="M11 11.5a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                </svg>   Deaths per one million - {{data['deathsPerOneMillion']}}</button>
+              </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<footer class="page-footer font-small bg-dark">
+  <div class="footer-copyright text-center py-3">
+    <p style="color: azure;">© Howbury Schools</p>
+  </div>
+  </footer>
+      <script type="text/javascript">
+        
+
+      </script>
+    </body>
+</html>
+

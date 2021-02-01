@@ -25,10 +25,9 @@ $ python -m venv env
 ```
 $ pip install -r requirements.txt
 ```
- server and Replace the configuration details in the config.py file with your Database URI
-```
 
-* Run the Flask APP
+
+### Run the Flask APP ###
 ```
 $ python app.py
 ```
